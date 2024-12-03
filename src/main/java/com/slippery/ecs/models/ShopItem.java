@@ -1,0 +1,30 @@
+package com.slippery.ecs.models;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.math.BigDecimal;
+
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+public class ShopItem {
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    private long id;
+    private String image;
+    private String name;
+    private  BigDecimal price;
+    private Boolean offer;
+    private BigDecimal offerAmount;
+    private String category;
+    private String status;
+    private Long quantity;
+    @Lob
+    private String description;
+}
