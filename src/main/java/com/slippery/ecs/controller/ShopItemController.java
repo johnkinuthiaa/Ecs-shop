@@ -6,6 +6,8 @@ import com.slippery.ecs.service.ShopItemService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/shop")
 @CrossOrigin()
@@ -29,6 +31,14 @@ public class ShopItemController {
     public ResponseEntity<ShopItemDto> createNewItem(@RequestBody ShopItem shopItemDetails){
         return ResponseEntity.ok(service.createNewItem(shopItemDetails));
     }
+    @PostMapping("/create/with-Array")
+    public ResponseEntity<ShopItemDto> createNewItemWithArray(@RequestBody List<ShopItem> items){
+        for(ShopItem item: items){
+            service.createNewItem(item);
+        }
+        return null;
+    }
+
     @PutMapping("/update")
     public ResponseEntity<ShopItemDto> updateItem(@RequestBody ShopItem shopItemDetails,@RequestParam Long id){
         return ResponseEntity.ok(service.UpdateItem(shopItemDetails,id));
@@ -53,7 +63,7 @@ public class ShopItemController {
     public ResponseEntity<ShopItemDto> deleteItemById(@RequestParam Long id){
         return ResponseEntity.ok(service.deleteItemById(id));
     }
-    @DeleteMapping("/delete/id")
+    @DeleteMapping("/delete/all")
     public ResponseEntity<ShopItemDto> deleteAllItems(){
         return ResponseEntity.ok(service.deleteAllItems());
     }
