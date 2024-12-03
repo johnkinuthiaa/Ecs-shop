@@ -8,15 +8,22 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/shop")
+@CrossOrigin()
 public class ShopItemController {
 
     /*
     shop item controller
+    ;
+    ;
      */
     private final ShopItemService service;
 
     public ShopItemController(ShopItemService service) {
         this.service = service;
+    }
+    @GetMapping("/get/all")
+    public ResponseEntity<ShopItemDto> getAllItems(){
+        return ResponseEntity.ok(service.getAllItems());
     }
     @PostMapping("/create/new")
     public ResponseEntity<ShopItemDto> createNewItem(@RequestBody ShopItem shopItemDetails){
@@ -41,5 +48,13 @@ public class ShopItemController {
     @GetMapping("/find/offer")
     public ResponseEntity<ShopItemDto> findItemByOffer(@RequestParam Boolean offer){
         return ResponseEntity.ok(service.findItemByOffer(offer));
+    }
+    @DeleteMapping("/delete/id")
+    public ResponseEntity<ShopItemDto> deleteItemById(@RequestParam Long id){
+        return ResponseEntity.ok(service.deleteItemById(id));
+    }
+    @DeleteMapping("/delete/id")
+    public ResponseEntity<ShopItemDto> deleteAllItems(){
+        return ResponseEntity.ok(service.deleteAllItems());
     }
 }

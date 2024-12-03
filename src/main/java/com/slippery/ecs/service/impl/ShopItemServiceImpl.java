@@ -113,4 +113,40 @@ public class ShopItemServiceImpl implements ShopItemService {
         }
         return response;
     }
+
+    @Override
+    public ShopItemDto getAllItems() {
+        ShopItemDto response =new ShopItemDto();
+        if(!repository.findAll().isEmpty()){
+            response.setShopItemList(repository.findAll());
+            response.setMessage("all items in store");
+            response.setStatusCode(200);
+        }else{
+            response.setMessage("shop is empty");
+            response.setStatusCode(404);
+        }
+        return response;
+    }
+
+    @Override
+    public ShopItemDto deleteItemById(Long id) {
+        ShopItemDto response =new ShopItemDto();
+        Optional<ShopItem> existingItem =repository.findById(id);
+        if(existingItem.isPresent()){
+            repository.deleteById(id);
+            response.setMessage("item with id "+id+" deleted ");
+            response.setStatusCode(200);
+            response.setItem(repository.findById(id).orElseThrow());
+        }else{
+            response.setErrorMessage("item with id "+id+" was not found ");
+            response.setStatusCode(200);
+
+        }
+        return response;
+    }
+
+    @Override
+    public ShopItemDto deleteAllItems() {
+        return null;
+    }
 }

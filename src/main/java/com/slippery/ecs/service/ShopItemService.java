@@ -10,4 +10,7 @@ public interface ShopItemService {
     ShopItemDto findItemByName(String name);
     ShopItemDto findItemByCategory(String category);
     ShopItemDto findItemByOffer(Boolean offer);
+    ShopItemDto getAllItems();
+    ShopItemDto deleteItemById(Long id);
+    ShopItemDto deleteAllItems();
 }
