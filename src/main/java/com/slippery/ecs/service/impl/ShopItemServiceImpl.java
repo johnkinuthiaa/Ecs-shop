@@ -84,7 +84,7 @@ public class ShopItemServiceImpl implements ShopItemService {
     public ShopItemDto findItemByCategory(String category) {
         ShopItemDto response =new ShopItemDto();
         List<ShopItem> itemByCategory =repository.findAll().stream()
-                .filter(shopItem -> shopItem.getCategory().toLowerCase().contains(category.toLowerCase()))
+                .filter(shopItem -> shopItem.getCategory().toLowerCase().equals(category.toLowerCase()))
                 .toList();
         if(!itemByCategory.isEmpty()){
             response.setMessage("items with the category "+category);
