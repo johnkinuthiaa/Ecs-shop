@@ -1,5 +1,7 @@
 package com.slippery.ecs.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,4 +29,7 @@ public class ShopItem {
     private Long quantity;
     @Lob
     private String description;
+    @ManyToOne
+    @JsonBackReference
+    private Cart cart;
 }
