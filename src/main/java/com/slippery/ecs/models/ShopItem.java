@@ -29,7 +29,9 @@ public class ShopItem {
     private Long quantity;
     @Lob
     private String description;
-    @ManyToOne
     @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "cart_id")
+
     private Cart cart;
 }

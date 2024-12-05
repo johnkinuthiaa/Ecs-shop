@@ -8,7 +8,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -19,10 +21,12 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
+    @JsonManagedReference
     @JoinColumn(name = "user_id")
     private User user;
-    @OneToMany
     @JsonManagedReference
-    private List<ShopItem> itemsInCart;
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+    private Set<ShopItem> items ;
+
 }

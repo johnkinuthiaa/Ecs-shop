@@ -2,6 +2,7 @@ package com.slippery.ecs.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.slippery.ecs.models.Cart;
 import com.slippery.ecs.models.ShopItem;
 import com.slippery.ecs.models.User;
 import lombok.Data;
@@ -17,4 +18,5 @@ public class CartDto {
     private String errorMessage;
     private User user;
     private List<ShopItem> itemsInCart;
+    private Cart cart;
 }
