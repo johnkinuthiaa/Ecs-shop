@@ -30,6 +30,5 @@ public class ShopItem {
     private Long quantity;
     @Lob
     private String description;
-    @ManyToMany
-    private Set<Cart> cart;
+
 }

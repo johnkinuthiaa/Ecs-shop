@@ -3,7 +3,6 @@ package com.slippery.ecs.controller;
 import com.slippery.ecs.dto.CartDto;
 import com.slippery.ecs.models.ShopItem;
 import com.slippery.ecs.service.CartService;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,9 +19,9 @@ public class CartController {
 //    public ResponseEntity<CartDto> createCart(@RequestParam Long userId){
 //        return ResponseEntity.ok(service.createNewCart(userId));
 //    }
-    @PostMapping("/add/items")
-    public ResponseEntity<CartDto> addItemToCart(@RequestBody ShopItem item,@RequestParam long userId,@RequestParam long cartId){
-        return ResponseEntity.ok(service.addItemToCart(item, userId, cartId));
+    @GetMapping("/add/items")
+    public ResponseEntity<CartDto> addItemToCart(@RequestParam Long itemId,@RequestParam Long UserId){
+        return ResponseEntity.ok(service.addItemToCart(itemId,UserId));
     }
     @GetMapping("/get/cart")
     public CartDto getCartById(@RequestParam Long id){

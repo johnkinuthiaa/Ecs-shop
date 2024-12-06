@@ -22,10 +22,8 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @OneToOne
-    @JoinColumn(name = "user_id")
     private User user;
-
     @ManyToMany
-    private Set<ShopItem> items ;
+    private List<ShopItem> items;
 
 }

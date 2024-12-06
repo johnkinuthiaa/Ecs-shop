@@ -20,7 +20,7 @@ public class User {
     private String userEmail;
     private String userPassword;
     private String role;
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonBackReference
-    private Cart cart;
+//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+//    @JsonBackReference
+//    private Cart cart;
 }

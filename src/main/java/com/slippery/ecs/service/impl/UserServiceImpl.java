@@ -15,10 +15,8 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder =new BCryptPasswordEncoder(12);
     private final UserRepository repository;
-    private final CartRepository cartRepository;
-    public UserServiceImpl(UserRepository repository, CartRepository cartRepository) {
+    public UserServiceImpl(UserRepository repository) {
         this.repository = repository;
-        this.cartRepository=cartRepository;
     }
 
     @Override
@@ -34,13 +32,7 @@ public class UserServiceImpl implements UserService {
             userDetails.setUsername(userDetails.getUsername().toLowerCase());
             userDetails.setRole("USER");
 
-            Cart cart =new Cart();
-            cart.setUser(userDetails);
-            cart.setItems(null);
-            userDetails.setCart(cart);
             repository.save(userDetails);
-
-            cartRepository.save(cart);
 
             response.setMessage("user "+ userDetails.getUsername()+" registered successfully");
             response.setStatusCode(200);

@@ -3,22 +3,27 @@ package com.slippery.ecs.service.impl;
 import com.slippery.ecs.dto.CartDto;
 import com.slippery.ecs.models.Cart;
 import com.slippery.ecs.models.ShopItem;
+import com.slippery.ecs.models.User;
 import com.slippery.ecs.repository.CartRepository;
 import com.slippery.ecs.repository.ShopItemRepository;
 import com.slippery.ecs.repository.UserRepository;
 import com.slippery.ecs.service.CartService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CartServiceImpl implements CartService {
     private final CartRepository repository;
     private final UserRepository userRepository;
     private final ShopItemRepository shopItemRepository;
+    private final CartRepository cartRepository;
 
-    public CartServiceImpl(CartRepository repository, UserRepository userRepository, ShopItemRepository shopItemRepository) {
+    public CartServiceImpl(CartRepository repository, UserRepository userRepository, ShopItemRepository shopItemRepository, CartRepository cartRepository) {
         this.repository = repository;
         this.userRepository = userRepository;
         this.shopItemRepository = shopItemRepository;
+        this.cartRepository = cartRepository;
     }
 
 
@@ -43,18 +48,22 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public CartDto addItemToCart(ShopItem item, long userId,long cartId) {
+    public CartDto addItemToCart(Long itemId, Long UserId) {
         CartDto response =new CartDto();
-        Cart cart =repository.findById(cartId).orElseThrow();
-        if(cart !=null){
-            cart.getItems().add(item);
-            item.getCart().add(cart);
-            repository.save(cart);
-            response.setMessage("item successfully added in cart! ");
+        ShopItem product = shopItemRepository.findById(itemId).get();
+        User user =userRepository.findById(UserId).get();
+
+        if(product !=null && user !=null){
+            Cart cart =new Cart();
+            cart.setUser(user);
+//            TODO: START HERE TOMORROW
+            cart.setItems();
+            cartRepository.save(cart);
+            response.setMessage("item added to cart");
             response.setStatusCode(200);
         }else{
-            response.setMessage("item not added in cart! ");
-            response.setStatusCode(404);
+            response.setMessage("item not added to cart");
+            response.setStatusCode(200);
         }
 
         return response;
@@ -62,17 +71,7 @@ public class CartServiceImpl implements CartService {
     @Override
     public CartDto clearCart(Long cartId) {
         CartDto response =new CartDto();
-        Cart cart =repository.findById(cartId).orElseThrow();
-        if(cart !=null){
-            cart.getItems().clear();
-            System.out.println("items deleted");
-            repository.save(cart);
-            response.setMessage("all items in cart cleared");
-            response.setStatusCode(200);
-        }else{
-            response.setMessage("cart not cleared ");
-            response.setStatusCode(404);
-        }
+
 
         return response;
     }
