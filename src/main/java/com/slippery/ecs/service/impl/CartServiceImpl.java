@@ -48,8 +48,7 @@ public class CartServiceImpl implements CartService {
         Cart cart =repository.findById(cartId).orElseThrow();
         if(cart !=null){
             cart.getItems().add(item);
-
-            item.setCart(cart);
+            item.getCart().add(cart);
             repository.save(cart);
             response.setMessage("item successfully added in cart! ");
             response.setStatusCode(200);

@@ -22,11 +22,10 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @OneToOne
-    @JsonManagedReference
     @JoinColumn(name = "user_id")
     private User user;
-    @JsonManagedReference
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+
+    @ManyToMany
     private Set<ShopItem> items ;
 
 }

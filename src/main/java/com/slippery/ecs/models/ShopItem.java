@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -29,9 +30,6 @@ public class ShopItem {
     private Long quantity;
     @Lob
     private String description;
-    @JsonBackReference
-    @ManyToOne
-    @JoinColumn(name = "cart_id")
-
-    private Cart cart;
+    @ManyToMany
+    private Set<Cart> cart;
 }
