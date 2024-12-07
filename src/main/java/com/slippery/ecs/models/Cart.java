@@ -24,6 +24,6 @@ public class Cart {
     @OneToOne
     private User user;
     @ManyToMany
-    private List<ShopItem> items;
+    private Set<ShopItem> items;
 
 }

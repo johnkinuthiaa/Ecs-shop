@@ -48,16 +48,15 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public CartDto addItemToCart(Long itemId, Long UserId) {
+    public CartDto addItemToCart(Long itemId, Long UserId,Long cartId) {
         CartDto response =new CartDto();
         ShopItem product = shopItemRepository.findById(itemId).get();
         User user =userRepository.findById(UserId).get();
+        Cart cart =cartRepository.findById(cartId).get();
 
         if(product !=null && user !=null){
-            Cart cart =new Cart();
             cart.setUser(user);
-//            TODO: START HERE TOMORROW
-            cart.setItems();
+            cart.getItems().add(product);
             cartRepository.save(cart);
             response.setMessage("item added to cart");
             response.setStatusCode(200);
@@ -71,7 +70,16 @@ public class CartServiceImpl implements CartService {
     @Override
     public CartDto clearCart(Long cartId) {
         CartDto response =new CartDto();
-
+        Cart cart =cartRepository.findById(cartId).orElseThrow();
+        if(cart !=null){
+            cart.getItems().clear();
+            cartRepository.save(cart);
+            response.setMessage("cleared your cart");
+            response.setStatusCode(200);
+        }else{
+            response.setMessage("items not cleared from cart");
+            response.setStatusCode(200);
+        }
 
         return response;
     }
