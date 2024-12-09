@@ -18,6 +18,7 @@ public class UserController {
         this.service = service;
 
     }
+
     @PostMapping("/register")
     public ResponseEntity<UserDto> register(@RequestBody User userDetails){
         return ResponseEntity.ok(service.register(userDetails));

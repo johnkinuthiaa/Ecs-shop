@@ -54,6 +54,7 @@ public class CartServiceImpl implements CartService {
         User user =userRepository.findById(UserId).get();
         Cart cart =cartRepository.findById(cartId).get();
 
+
         if(product !=null && user !=null){
             cart.setUser(user);
             cart.getItems().add(product);
