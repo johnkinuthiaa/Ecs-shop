@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -21,7 +22,7 @@ public class ShopItem {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private long id;
-    @ElementCollection
+    @Lob
     private List<String> images;
     private String name;
     private  BigDecimal price;

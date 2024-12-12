@@ -37,7 +37,7 @@ public class ShopItemServiceImpl implements ShopItemService {
         if(existingItem.isPresent()){
             ShopItem updatedItem =existingItem.get();
             updatedItem.setName(shopItemDetails.getName());
-            updatedItem.setImage(shopItemDetails.getImage());
+            updatedItem.setImages(shopItemDetails.getImages());
             updatedItem.setPrice(shopItemDetails.getPrice());
             updatedItem.setDescription(shopItemDetails.getDescription());
             updatedItem.setOffer(shopItemDetails.getOffer());
