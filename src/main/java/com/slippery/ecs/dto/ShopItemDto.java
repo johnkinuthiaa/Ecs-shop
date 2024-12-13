@@ -12,11 +12,6 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ShopItemDto {
-    private String image;
-    private String price;
-    private String offer;
-    private String category;
-    private String description;
     private int statusCode;
     private String message;
     private String errorMessage;

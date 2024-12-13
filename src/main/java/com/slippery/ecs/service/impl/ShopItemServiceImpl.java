@@ -49,7 +49,7 @@ public class ShopItemServiceImpl implements ShopItemService {
             response.setMessage("item with id "+id+" updated successfully");
             response.setStatusCode(200);
         }else{
-            response.setMessage("item with id "+id+" not updated successfully because it does not exist");
+            response.setErrorMessage("item with id "+id+" not updated successfully because it does not exist");
             response.setStatusCode(404);
         }
         return response;
@@ -58,7 +58,8 @@ public class ShopItemServiceImpl implements ShopItemService {
     @Override
     public ShopItemDto findItemById(Long id) {
         ShopItemDto response =new ShopItemDto();
-        response.setItem(repository.findById(id).orElseThrow());
+        ShopItem item =repository.findById(id).orElseThrow(() ->new RuntimeException("item not found"));
+        response.setItem(item);
         response.setStatusCode(200);
         return response;
     }
