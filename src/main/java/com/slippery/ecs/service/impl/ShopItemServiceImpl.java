@@ -68,7 +68,7 @@ public class ShopItemServiceImpl implements ShopItemService {
     public ShopItemDto findItemByName(String name) {
         ShopItemDto response =new ShopItemDto();
         List<ShopItem> itemByName =repository.findAll().stream()
-                .filter(shopItem -> shopItem.getName().toLowerCase().contains(name.toLowerCase()))
+                .filter(shopItem -> shopItem.getName().toLowerCase().equals(name.toLowerCase()))
                 .toList();
         if(!itemByName.isEmpty()){
             response.setMessage("items with the name "+name);
