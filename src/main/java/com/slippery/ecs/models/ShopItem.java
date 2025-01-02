@@ -17,7 +17,7 @@ import java.util.Set;
 @Setter
 @Builder
 public class ShopItem {
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private long id;
     @Lob
