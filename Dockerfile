@@ -10,4 +10,3 @@ COPY src ./src
 
 CMD ["./mvnw", "spring-boot:run"]
 LABEL authors="slippery"
-#lightyagamikingkade
